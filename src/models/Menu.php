@@ -20,12 +20,16 @@ use Yii;
  */
 class Menu extends \yii\db\ActiveRecord
 {
+    const HIDE_IN_MENU_YES = 1;
+    const HIDE_IN_MENU_NO = 0;
+    const HIDE_IN_BREADCRUMB_YES = 1;
+    const HIDE_IN_BREADCRUMB_NO = 0;
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%menu}}';
+        return '{{%ant_menu}}';
     }
 
     /**
@@ -36,6 +40,7 @@ class Menu extends \yii\db\ActiveRecord
         return [
             [['parent_id', 'menu_sort'], 'integer'],
             [['menu_name', 'create_at'], 'required'],
+            [['menu_name', 'menu_icon', 'menu_path'], 'trim'],
             [['hide_in_menu', 'hide_in_breadcrumb'], 'default', 'value' => 0],
             [['create_at', 'update_at', 'hide_in_menu', 'hide_in_breadcrumb'], 'safe'],
             [['menu_name'], 'string', 'max' => 20],
