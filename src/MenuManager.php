@@ -32,6 +32,8 @@ use yii\di\Instance;
  */
 class MenuManager extends \yii\base\Object
 {
+    public $version = '1.0.0';
+    
     /**
      * @var string user's table
      */
