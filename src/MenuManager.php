@@ -135,12 +135,13 @@ class MenuManager extends \yii\base\Object
      */
     public function getAntMenu($groupId)
     {
-        $data = $this->cache->get($this->cacheKey . $groupId);
+        $key = __CLASS__ . $this->cacheKey . $groupId;
+        $data = $this->cache->get($key . $groupId);
         if ($data === false) {
             $rows = $this->findMenusByGroupId($groupId)->orderBy(['menu_sort' => SORT_ASC])->asArray()->all();
             $data = static::transformTreeMenu($rows);
             unset($rows);
-            $this->cache->set($this->cacheKey . $groupId, $data, $this->expire);
+            $this->cache->set($key, $data, $this->expire);
         }
 
         return $data;
@@ -360,11 +361,11 @@ class MenuManager extends \yii\base\Object
     protected function cleanCache($groupId = 0)
     {
         if ($groupId) {
-            $this->cache->delete($this->cacheKey . $groupId);
+            $this->cache->delete(__CLASS__ . $this->cacheKey . $groupId);
         } else {
             $groups = GroupMenu::find()->groupBy('group_id')->all();
             foreach ($groups as $key => $item) {
-                $this->cache->delete($this->cacheKey . $item->group_id);
+                $this->cache->delete(__CLASS__ . $this->cacheKey . $item->group_id);
             }
             unset($groups);
         }
