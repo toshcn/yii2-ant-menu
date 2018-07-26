@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "toshcn\\yii2\\menu\\": "src"
+            "toshcn\\yii2\\menu\\": "src/"
         }
     }
 }
