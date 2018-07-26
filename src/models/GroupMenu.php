@@ -31,6 +31,7 @@ class GroupMenu extends \yii\db\ActiveRecord
             [['menu_id', 'group_id'], 'integer'],
             [['menu_id', 'group_id'], 'unique', 'targetAttribute' => ['menu_id', 'group_id']],
             ['menu_id', 'exist', 'targetClass' => Menu::className(), 'targetAttribute' => 'id'],
+            ['group_id', 'exist', 'targetClass' => Group::className(), 'targetAttribute' => 'id'],
         ];
     }
 

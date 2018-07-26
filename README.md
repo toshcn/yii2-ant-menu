@@ -25,7 +25,54 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
+配置应用组件:如common->config->main.php
 
 ```php
-<?= \toshcn\yii2\menu\AutoloadExample::widget(); ?>```
+'components' => [
+    'menuManager' => [
+        'class' => 'toshcn\yii2\menu\MenuManager',
+        'cache' = 'cache',
+        'cacheKey' => 'menu_cache_key',
+        'expire' => 3600,
+        'userTable' => '{{%user}}',
+        'superAdminGroupId' => 1
+    ],
+]
+```
+
+配置命令行: 基础模板在config->console.php，高级模板在console->config->main.php
+```php
+'controllerMap' => [
+    'menu' => [
+        'class' => 'toshcn\yii2\menu\commands\Menu',
+    ],
+],
+```
+
+运行数据迁移：
+```
+php yii migrate --migrationPath=@vendor/toshcn/yii2/menu/migrations
+```
+
+为用户表添加`group_id`字段
+```
+php yii menu/add-user-group-id-column
+```
+
+添加一个用户组：
+```
+Yii::$app->menuManager->addGroup('user', '用户组说明：普通用户组');
+```
+
+添加一个菜单：
+```
+$parentId = 0;
+Yii::$app->menuManager->addMenu('menu_name', 'path', $parentId, 'icon');
+```
+
+给用户组分配一个菜单：
+```
+$menuId = 1;
+$groupId = 1;
+Yii::$app->menuManger->assignMenu($menuId, $groupId);
+```
