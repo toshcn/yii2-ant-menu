@@ -17,5 +17,10 @@
         "psr-4": {
             "toshcn\\yii2\\menu\\": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }
