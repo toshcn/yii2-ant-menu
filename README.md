@@ -51,7 +51,7 @@ Usage
 
 运行数据迁移：
 ```
-php yii migrate --migrationPath=@vendor/toshcn/yii2/menu/migrations
+php yii migrate --migrationPath=@vendor/toshcn/yii2-ant-menu/src/migrations
 ```
 
 为用户表添加`group_id`字段
